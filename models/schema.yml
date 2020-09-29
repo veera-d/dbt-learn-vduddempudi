@@ -33,3 +33,28 @@ models:
         tests:
           - accepted_values:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+
+models:
+  - name: orders
+    description: This model gives cutomer id and order id that are processed successfully and the amount they paid 
+    columns:
+      - name: customer_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+
+
+sources:
+  - name: jaffle_shop
+    database: raw
+    tables:
+      - name: customers
+      - name: orders
+  - name: stripe
+    database: raw
+    tables:
+      - name: payment
